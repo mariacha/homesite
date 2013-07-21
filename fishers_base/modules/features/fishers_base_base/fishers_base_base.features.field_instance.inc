@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * os_project_base.features.field_instance.inc
+ * fishers_base_base.features.field_instance.inc
  */
 
 /**
  * Implements hook_field_default_field_instances().
  */
-function os_project_base_field_default_field_instances() {
+function fishers_base_base_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance: 'node-page-body'

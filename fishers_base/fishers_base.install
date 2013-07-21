@@ -1,17 +1,17 @@
 <?php
 /**
  * @file
- * Main installation logic for PROJECTNAME.
+ * Main installation logic for Fishers website.
  */
 
 !function_exists('profiler_v2') ? require_once 'libraries/profiler/profiler.inc' : FALSE;
-profiler_v2('os_project');
+profiler_v2('fishers_base');
 
 /**
  * Implements hook_install_tasks_alter().
  */
-function os_project_install_tasks_alter(&$tasks) {
-  $tasks['os_project_install_profile_complete'] = array();
+function fishers_base_install_tasks_alter(&$tasks) {
+  $tasks['fishers_base_install_profile_complete'] = array();
 }
 
 /**
@@ -19,7 +19,7 @@ function os_project_install_tasks_alter(&$tasks) {
  *
  * Perform actions to set up the site for this profile.
  */
-function os_project_install() {
+function fishers_base_install() {
   // Enable the admin theme.
   db_update('system')
     ->fields(array('status' => 1))
@@ -28,7 +28,7 @@ function os_project_install() {
     ->execute();
 
   // Set theme.
-  $config = profiler_v2_load_config('os_project');
+  $config = profiler_v2_load_config('fishers_base');
   $theme_name = $config['theme'];
   variable_set('theme_default', $theme_name);
   theme_enable(array($theme_name));
@@ -68,7 +68,7 @@ function os_project_install() {
 /**
  * Tasks to run at the end of the installation process.
  */
-function os_project_install_profile_complete() {
+function fishers_base_install_profile_complete() {
 }
 
 /**
@@ -77,7 +77,7 @@ function os_project_install_profile_complete() {
 function system_form_install_select_profile_form_alter(&$form, $form_state) {
   unset($form['profile']['Minimal'], $form['profile']['Standard'], $form['profile']['OpenSourcery']);
   foreach ($form['profile'] as $key => $element) {
-    $form['profile'][$key]['#value'] = 'os_project';
+    $form['profile'][$key]['#value'] = 'fishers_base';
   }
 }
 
@@ -86,7 +86,7 @@ function system_form_install_select_profile_form_alter(&$form, $form_state) {
  *
  * Set defaults on "Configure site" form during installation.
  */
-function os_project_form_install_configure_form_alter(&$form, $form_state) {
+function fishers_base_form_install_configure_form_alter(&$form, $form_state) {
   $server_name = $_SERVER['SERVER_NAME'];
 
   // Pre-populate the site name with the server name.

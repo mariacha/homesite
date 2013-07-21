@@ -1,9 +1,9 @@
-name = PROJECTNAME base
+name = Fishers website base
 description = Base content types, roles and usability enhancements.
 core = 7.x
-package = PROJECTNAME
+package = Fishers website
 version = 7.x-2.0-alpha1
-project = os_project_base
+project = fishers_base_base
 dependencies[] = contextual
 dependencies[] = ctools
 dependencies[] = features

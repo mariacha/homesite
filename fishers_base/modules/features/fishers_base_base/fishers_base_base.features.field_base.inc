@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * os_project_base.features.field_base.inc
+ * fishers_base_base.features.field_base.inc
  */
 
 /**
  * Implements hook_field_default_field_bases().
  */
-function os_project_base_field_default_field_bases() {
+function fishers_base_base_field_default_field_bases() {
   $field_bases = array();
 
   // Exported field_base: 'body'

@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * os_project_base.features.user_permission.inc
+ * fishers_base_base.features.user_permission.inc
  */
 
 /**
  * Implements hook_user_default_permissions().
  */
-function os_project_base_user_default_permissions() {
+function fishers_base_base_user_default_permissions() {
   $permissions = array();
 
   // Exported permission: access contextual links.

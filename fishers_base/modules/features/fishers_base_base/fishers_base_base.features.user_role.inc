@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * os_project_base.features.user_role.inc
+ * fishers_base_base.features.user_role.inc
  */
 
 /**
  * Implements hook_user_default_roles().
  */
-function os_project_base_user_default_roles() {
+function fishers_base_base_user_default_roles() {
   $roles = array();
 
   // Exported role: administrator.

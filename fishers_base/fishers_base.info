@@ -1,8 +1,8 @@
 ; Project-specific installation profile
 
-name = PROJECTNAME
-distribution_name = PROJECTNAME
-description = DESCRIPTION
+name = Fishers website
+distribution_name = Fishers website
+description = The home website for fisherspdx.com.
 core = 7.x
 theme = bartik
 
@@ -44,14 +44,14 @@ dependencies[] = token
 dependencies[] = wysiwyg
 
 ; Features
-dependencies[] = os_project_base
+dependencies[] = fishers_base_base
 
 ;
 ; Users
 ;
 users[admin][uid] = 1
 users[admin][name] = admin
-users[admin][mail] = admin@os_project.example.com
+users[admin][mail] = admin@fishers_base.example.com
 users[admin][status] = 1
 users[admin][data][overlay] = 0
 
@@ -60,8 +60,8 @@ users[admin][data][overlay] = 0
 ;
 variables[site_frontpage] = node/1
 ;variables[site_404] =
-variables[site_mail] = admin@os_project.dev
-variables[site_name] = PROJECTNAME
+variables[site_mail] = admin@fishers_base.dev
+variables[site_name] = Fishers website
 variables[admin_theme] = seven
 variables[node_admin_theme] = 1
 variables[site_default_country] = US
@@ -70,7 +70,7 @@ variables[site_default_country] = US
 variables[dblog_row_limit] = 1000000
 
 ; Disable core image styles
-variables[os_project_base_remove_core_image_styles] = 1
+variables[fishers_base_base_remove_core_image_styles] = 1
 
 ; Up image quality.
 variables[image_jpeg_quality] = 100

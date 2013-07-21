@@ -2,15 +2,15 @@
 
 /**
  * @file
- * Installation for os_project_base.
+ * Installation for fishers_base_base.
  */
 
 /**
  * Implements hook_install().
  */
-function os_project_base_install() {
+function fishers_base_base_install() {
   // Ensure our filters are installed.
-  features_rebuild(array('os_project_base' => array('filter')));
+  features_rebuild(array('fishers_base_base' => array('filter')));
 
   // Enable default permissions for system roles.
   $filtered_html_format = filter_format_load('filtered_html');

@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * os_project_base.file_default_displays.inc
+ * fishers_base_base.file_default_displays.inc
  */
 
 /**
  * Implements hook_file_default_displays().
  */
-function os_project_base_file_default_displays() {
+function fishers_base_base_file_default_displays() {
   $export = array();
 
   $file_display = new stdClass();

@@ -1,6 +1,6 @@
-name = PROJECTNAME Demo Content
+name = Fishers website Demo Content
 core = 7.x
-package = PROJECTNAME
+package = Fishers website
 dependencies[] = ctools
 dependencies[] = deploy
 dependencies[] = entity

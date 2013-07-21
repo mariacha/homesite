@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * os_project_base.features.filter.inc
+ * fishers_base_base.features.filter.inc
  */
 
 /**
  * Implements hook_filter_default_formats().
  */
-function os_project_base_filter_default_formats() {
+function fishers_base_base_filter_default_formats() {
   $formats = array();
 
   // Exported format: Filtered HTML.

@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * os_project_base.pages_default.inc
+ * fishers_base_base.pages_default.inc
  */
 
 /**
  * Implements hook_default_page_manager_pages().
  */
-function os_project_base_default_page_manager_pages() {
+function fishers_base_base_default_page_manager_pages() {
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;

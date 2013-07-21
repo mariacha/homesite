@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * os_project_base.strongarm.inc
+ * fishers_base_base.strongarm.inc
  */
 
 /**
  * Implements hook_strongarm().
  */
-function os_project_base_strongarm() {
+function fishers_base_base_strongarm() {
   $export = array();
 
   $strongarm = new stdClass();
