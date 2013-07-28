@@ -63,6 +63,9 @@ libraries[profiler][patch][] = "http://drupal.org/files/profiler_heirarchical_no
 
 ; Project-specific modules, and overrides.
 
+; Media gallery
+projects[media_gallery][version] = "2.x-dev"
+
 ; OS blog
 projects[os_blog][type] = "module"
 projects[os_blog][subdir] = "features"

@@ -5,3 +5,21 @@
  */
 
 include_once 'fishers_wordpress_migration.features.inc';
+
+/**
+ * Implements hook_feeds_parser_sources_alter().
+ * 
+ * Adds several new elements to the "Source" dropdown on 
+ * admin/structure/feeds/nextgen_gallery/mapping page.
+ */
+function fishers_wordpress_migration_feeds_parser_sources_alter(&$sources, $content_type) {
+  $sources['wp_ngg_gallery_name'] = array(
+    'name' => t('NG Gallery Name'),
+    'description' => t('The name of the nextgen gallery'),
+    'callback' => 'fishers_wordpress_migration_wp_ngg_gallery_name',
+  );
+}
+
+function fishers_wordpress_migration_wp_ngg_gallery_name(FeedsSource $source) {
+  return $source->name;
+}
