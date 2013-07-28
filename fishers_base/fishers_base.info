@@ -59,10 +59,11 @@ users[admin][data][overlay] = 0
 ;
 ; Variables
 ;
-variables[site_frontpage] = node/1
+variables[site_frontpage] = blog
 ;variables[site_404] =
-variables[site_mail] = admin@fishers_base.dev
-variables[site_name] = Fishers website
+variables[site_mail] = maricha@gmail.com
+variables[site_name] = FishersPDX
+variables[site_slogan] = Nerdy and Foodie
 variables[admin_theme] = seven
 variables[node_admin_theme] = 1
 variables[site_default_country] = US
