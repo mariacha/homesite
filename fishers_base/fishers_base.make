@@ -63,3 +63,14 @@ libraries[profiler][patch][] = "http://drupal.org/files/profiler_heirarchical_no
 
 ; Project-specific modules, and overrides.
 
+; OS blog
+projects[os_blog][type] = "module"
+projects[os_blog][subdir] = "features"
+projects[os_blog][download][branch] = "7.x-2.x"
+projects[os_blog][download][url] = "https://github.com/opensourcery/os_blog.git"
+
+; Wordpress migrate
+projects[wordpress_migrate][version] = "2.2"
+
+; Wordpress migrate
+projects[migrate][version] = "2.5"
