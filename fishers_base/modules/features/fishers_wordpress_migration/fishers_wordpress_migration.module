@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Fishers wordpress migration feature.
+ */
+
+include_once 'fishers_wordpress_migration.features.inc';
