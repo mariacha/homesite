@@ -1,0 +1,105 @@
+<?php
+
+/**
+ * 
+ */
+
+/**
+ * Implements hook_install().
+ * 
+ * Loads the data in the xml file in this module to the database.
+ */
+function fishers_wordpress_migration_install() {
+  $directory = 'wordpress://';
+  if (!file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
+    form_set_error('wxr_file',
+      t('Could not prepare directory %directory - make sure your Drupal files directory exists and is writable',
+        array('%directory' => $directory)));
+    return;
+  }
+
+  $tmpfile = drupal_get_path('module', 'fishers_wordpress_migration') . '/fisherspdx.wordpress.2013-07-28.xml';
+  // Note that for either path we take here, $tmpfile will be the name of
+  // the uploaded/retrieved file, and $destination will be the name of the
+  // desired final destination.
+  if ($tmpfile) {
+    // Handle uploaded file
+    $filename = 'fisherspdx.wordpress.2013-07-28.xml';
+    $destination = $directory . str_replace(' ', '%20', $filename);
+  }
+  else {
+    drupal_set_message('Could not load the wordpress import file.');
+  }
+
+  WordPressBlog::preprocessFile($tmpfile, $destination);
+
+  try {
+    $blog = wordpress_migrate_blog($destination);
+  }
+  catch (Exception $e) {
+    form_set_error('wxr_file', $e->getMessage());
+    file_unmanaged_delete($destination);
+    return;
+  }
+
+  // Import each migration in order, until done or time is running out
+  if (variable_get('wordpress_migrate_import_method', 0) == 0) {
+    $operations = array();
+    foreach ($blog->migrations() as $migration) {
+       $operations[] = array('migrate_ui_batch',
+                              array('import', $migration->getMachineName(),
+                                    array('unit' => 'items', 'value' => ''), FALSE));
+    }
+
+    $batch = array(
+      'operations' => $operations,
+      'title' => t('WordPress import in progress'),
+      'file' => drupal_get_path('module', 'migrate_ui') .
+                    '/migrate_ui.pages.inc',
+      'init_message' => t('Starting import process'),
+      'progress_message' => t(''),
+      'error_message' => t('An error occurred. Some or all of the import processing has failed.'),
+      'finished' => 'migrate_ui_batch_finish',
+    );
+    batch_set($batch);
+  }
+  else {
+    $spawned = FALSE;
+    $force_drush = variable_get('wordpress_migrate_force_drush', FALSE);
+    // Set up informational messages depending on Drush configuration.
+    if ($force_drush) {
+      $migration_in_progress = t('Your blog is being imported. You will receive an email when the import is complete.');
+    }
+    else {
+      $migration_in_progress = t('The blog is too large to completely import immediately.
+        The rest of the import will be run in the background and you will receive an email
+        when it is complete.');
+    }
+    foreach ($blog->migrations() as $migration) {
+      if ($force_drush || (($result = $migration->processImport()) && $result == MigrationBase::RESULT_INCOMPLETE)) {
+        $drush = variable_get('wordpress_migrate_drush', '');
+        if (!$drush) {
+          $message = t('The blog was too large to import through the browser - please
+              <a href="@config">configure drush</a> so the import process may be
+              run in the background.',
+            array('@config' => url('admin/content/wordpress')));
+          form_set_error('wxr_file', $message);
+          break;
+        }
+        drupal_set_message($migration_in_progress);
+        $uri = 'http://' . $_SERVER['HTTP_HOST'];
+        $log_file = '/tmp/' . $filename . '.import.log';
+        $uid = $GLOBALS['user']->uid;
+        $command = "$drush --user=$uid --uri=$uri wordpress-migrate-import --root=" .
+                   DRUPAL_ROOT . " $destination >$log_file 2>&1 &";
+        exec($command);
+        $spawned = TRUE;
+        break;
+      }
+    }
+    if (!$spawned) {
+      drupal_set_message(t('File %filename successfully uploaded and imported',
+        array('%filename' => $filename)));
+    }
+  }
+}
