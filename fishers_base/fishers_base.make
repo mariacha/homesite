@@ -63,6 +63,12 @@ libraries[profiler][patch][] = "http://drupal.org/files/profiler_heirarchical_no
 
 ; Project-specific modules, and overrides.
 
+; Feeds
+projects[feeds][version] = "2.0-alpha8"
+
+; Job Scheduler
+projects[job_scheduler][version] = "2.0-alpha3"
+
 ; Media gallery
 projects[media_gallery][version] = "2.x-dev"
 

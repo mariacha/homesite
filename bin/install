@@ -33,7 +33,7 @@ fi
 cd drupal
 drush en diff -y
 drush en views_ui -y
-drush en styleguide -y
+drush en styleguide feeds_ui -y
 cd -
 
 # Run behat.
