@@ -1,15 +1,25 @@
 <?php
 
 /**
- * 
+ *
  */
 
 /**
  * Implements hook_install().
- * 
+ *
  * Loads the data in the xml file in this module to the database.
  */
 function fishers_wordpress_migration_install() {
+  _fishers_wordpress_migration_add_wp_blog('fisherspdx.wordpress.2013-07-28.xml');
+  _fishers_wordpress_migration_add_galleries('ghalidrm_albums.csv');
+  _fishers_wordpress_migration_add_images();
+
+}
+
+/**
+ * Loads all blog entries from a file within this module.
+ */
+function _fishers_wordpress_migration_add_wp_blog($filename){
   $directory = 'wordpress://';
   if (!file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
     form_set_error('wxr_file',
@@ -18,13 +28,12 @@ function fishers_wordpress_migration_install() {
     return;
   }
 
-  $tmpfile = drupal_get_path('module', 'fishers_wordpress_migration') . '/fisherspdx.wordpress.2013-07-28.xml';
+  $tmpfile = drupal_get_path('module', 'fishers_wordpress_migration') . '/' . $filename;
   // Note that for either path we take here, $tmpfile will be the name of
   // the uploaded/retrieved file, and $destination will be the name of the
   // desired final destination.
   if ($tmpfile) {
     // Handle uploaded file
-    $filename = 'fisherspdx.wordpress.2013-07-28.xml';
     $destination = $directory . str_replace(' ', '%20', $filename);
   }
   else {
@@ -102,14 +111,19 @@ function fishers_wordpress_migration_install() {
         array('%filename' => $filename)));
     }
   }
-  
+}
+
+/**
+ * Loads all galleries from a csv within this module.
+ */
+function _fishers_wordpress_migration_add_galleries($filename){
   // Loads galleries.
   $form = array('#importer_id' => 'nextgen_gallery');
-  
-  $csv = file_get_contents(DRUPAL_ROOT . '/' . drupal_get_path('module', 'fishers_wordpress_migration') . '/ghalidrm_albums.csv');
-  $path = 'private://feeds/ghalidrm_albums.csv';
+
+  $csv = file_get_contents(DRUPAL_ROOT . '/' . drupal_get_path('module', 'fishers_wordpress_migration') . '/' . $filename);
+  $path = 'private://feeds/' . $filename;
   $file = file_save_data($csv, $path, FILE_EXISTS_REPLACE);
-  
+
   $form_state = array(
     'values' => array(
       'feeds' => array (
@@ -120,6 +134,16 @@ function fishers_wordpress_migration_install() {
       )
     )
   );
-  
+
   feeds_import_form_submit($form, $form_state);
+}
+
+/**
+ * Update gallery and file id for old nextgen gallery images.
+ *
+ * SQL query used to produce the csv:
+ * SELECT wp_ngg_pictures.*, CONCAT('sites/default/files/', path, '/', filename) as fullpath FROM `wp_ngg_pictures` LEFT JOIN `wp_ngg_gallery` ON galleryid=gid
+ */
+function _fishers_wordpress_migration_add_images(){
+
 }

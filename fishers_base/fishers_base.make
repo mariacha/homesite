@@ -66,6 +66,9 @@ libraries[profiler][patch][] = "http://drupal.org/files/profiler_heirarchical_no
 ; Feeds
 projects[feeds][version] = "2.0-alpha8"
 
+; Feeds Files
+projects[feeds_files][version] = "1.x-dev"
+
 ; Job Scheduler
 projects[job_scheduler][version] = "2.0-alpha3"
 

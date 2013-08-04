@@ -79,5 +79,80 @@ function fishers_wordpress_migration_feeds_importer_default() {
   );
   $export['nextgen_gallery'] = $feeds_importer;
 
+  $feeds_importer = new stdClass();
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'nextgen_images';
+  $feeds_importer->config = array(
+    'name' => 'Nextgen Images',
+    'description' => 'The images in the nextgen galleries',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsFileFetcher',
+      'config' => array(
+        'allowed_extensions' => 'txt csv tsv xml opml',
+        'direct' => FALSE,
+        'directory' => 'private://feeds',
+        'allowed_schemes' => array(
+          0 => 'public',
+          1 => 'private',
+        ),
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsCSVParser',
+      'config' => array(
+        'delimiter' => ',',
+        'no_headers' => 0,
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsFileProcessor',
+      'config' => array(
+        'bundle' => 'image',
+        'author' => '1',
+        'authorize' => 1,
+        'debug' => array(
+          'newEntity' => 0,
+          'entityLoad' => 0,
+          'entitySave' => 0,
+          'setTargetElement' => 0,
+          'existingEntityId' => 0,
+        ),
+        'mappings' => array(
+          0 => array(
+            'source' => 'alttext',
+            'target' => 'field_file_image_alt_text',
+            'unique' => FALSE,
+          ),
+          1 => array(
+            'source' => 'filename',
+            'target' => 'filename',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'description',
+            'target' => 'media_description',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'fullpath',
+            'target' => 'uri',
+            'unique' => FALSE,
+          ),
+        ),
+        'update_existing' => '1',
+        'input_format' => NULL,
+        'skip_hash_check' => 0,
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => 1800,
+    'expire_period' => 3600,
+    'import_on_create' => TRUE,
+    'process_in_background' => FALSE,
+  );
+  $export['nextgen_images'] = $feeds_importer;
+
   return $export;
 }
