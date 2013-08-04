@@ -102,4 +102,24 @@ function fishers_wordpress_migration_install() {
         array('%filename' => $filename)));
     }
   }
+  
+  // Loads galleries.
+  $form = array('#importer_id' => 'nextgen_gallery');
+  
+  $csv = file_get_contents(DRUPAL_ROOT . '/' . drupal_get_path('module', 'fishers_wordpress_migration') . '/ghalidrm_albums.csv');
+  $path = 'private://feeds/ghalidrm_albums.csv';
+  $file = file_save_data($csv, $path, FILE_EXISTS_REPLACE);
+  
+  $form_state = array(
+    'values' => array(
+      'feeds' => array (
+        'FeedsFileFetcher' => array(
+          'fid' => $file->fid,
+          'source' => $path,
+        )
+      )
+    )
+  );
+  
+  feeds_import_form_submit($form, $form_state);
 }

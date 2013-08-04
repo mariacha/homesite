@@ -5,6 +5,7 @@ package = Fishers website
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = feeds
+dependencies[] = media_gallery
 dependencies[] = number
 dependencies[] = os_blog
 dependencies[] = strongarm

@@ -84,7 +84,7 @@ function fishers_wordpress_migration_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'wordpress_migrate_tag_vocabulary';
-  $strongarm->value = '';
+  $strongarm->value = 'blog_categories';
   $export['wordpress_migrate_tag_vocabulary'] = $strongarm;
 
   $strongarm = new stdClass();
