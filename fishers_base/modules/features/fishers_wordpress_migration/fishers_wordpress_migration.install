@@ -7,12 +7,16 @@
 /**
  * Implements hook_install().
  *
- * Loads the data in the xml file in this module to the database.
+ * Loads the data in the xml file in this module to the database. SQL query used
+ * to produce the csv:
+ *
+ * SELECT wp_ngg_pictures.*, CONCAT('public://', path, '/', filename) as
+ * fullpath FROM `wp_ngg_pictures` LEFT JOIN `wp_ngg_gallery` ON galleryid=gid
  */
 function fishers_wordpress_migration_install() {
   _fishers_wordpress_migration_add_wp_blog('fisherspdx.wordpress.2013-07-28.xml');
-  _fishers_wordpress_migration_add_galleries('ghalidrm_albums.csv');
-  _fishers_wordpress_migration_add_images();
+  _fishers_wordpress_migration_add_feed('ghalidrm_albums.csv', 'nextgen_gallery');
+  _fishers_wordpress_migration_add_feed('wp_ngg_pictures.csv', 'nextgen_images');
 
 }
 
@@ -116,15 +120,20 @@ function _fishers_wordpress_migration_add_wp_blog($filename){
 /**
  * Loads all galleries from a csv within this module.
  */
-function _fishers_wordpress_migration_add_galleries($filename){
+function _fishers_wordpress_migration_add_feed($filename, $importer){
   // Loads galleries.
-  $form = array('#importer_id' => 'nextgen_gallery');
+  $form = array('#importer_id' => $importer);
 
   $csv = file_get_contents(DRUPAL_ROOT . '/' . drupal_get_path('module', 'fishers_wordpress_migration') . '/' . $filename);
   $path = 'private://feeds/' . $filename;
   $file = file_save_data($csv, $path, FILE_EXISTS_REPLACE);
 
   $form_state = array(
+    'programmed' => TRUE,
+    'rebuild' => FALSE,
+    'submit_handlers' => array('feeds_import_form_submit'),
+    'process_input' => TRUE,
+    'submitted' => TRUE,
     'values' => array(
       'feeds' => array (
         'FeedsFileFetcher' => array(
@@ -135,15 +144,5 @@ function _fishers_wordpress_migration_add_galleries($filename){
     )
   );
 
-  feeds_import_form_submit($form, $form_state);
-}
-
-/**
- * Update gallery and file id for old nextgen gallery images.
- *
- * SQL query used to produce the csv:
- * SELECT wp_ngg_pictures.*, CONCAT('sites/default/files/', path, '/', filename) as fullpath FROM `wp_ngg_pictures` LEFT JOIN `wp_ngg_gallery` ON galleryid=gid
- */
-function _fishers_wordpress_migration_add_images(){
-
+  drupal_process_form('feeds_import_form', $form, $form_state);
 }

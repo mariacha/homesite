@@ -147,10 +147,10 @@ function fishers_wordpress_migration_feeds_importer_default() {
     ),
     'content_type' => '',
     'update' => 0,
-    'import_period' => 1800,
+    'import_period' => '-1',
     'expire_period' => 3600,
-    'import_on_create' => TRUE,
-    'process_in_background' => FALSE,
+    'import_on_create' => 1,
+    'process_in_background' => 0,
   );
   $export['nextgen_images'] = $feeds_importer;
 
