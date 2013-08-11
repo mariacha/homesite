@@ -58,7 +58,7 @@ function os_event_field_default_field_instances() {
   $field_instances['node-event-field_event_date'] = array(
     'bundle' => 'event',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The beginning and end days of your goal.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -82,15 +82,15 @@ function os_event_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'div',
     'field_name' => 'field_event_date',
     'label' => 'Date',
     'required' => 1,
     'settings' => array(
-      'default_format' => 'short',
-      'default_value' => 'blank',
-      'default_value2' => 'blank',
+      'default_value' => 'now',
+      'default_value2' => 'strtotime',
       'default_value_code' => '',
-      'default_value_code2' => '',
+      'default_value_code2' => '+1 week',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -98,10 +98,9 @@ function os_event_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
+        'input_format' => 'n/j/Y',
         'input_format_custom' => '',
         'label_position' => 'above',
-        'repeat_collapsed' => 0,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
@@ -110,10 +109,54 @@ function os_event_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-event-field_predicted_result'
+  $field_instances['node-event-field_predicted_result'] = array(
+    'bundle' => 'event',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'A measurable result that you predict will occur due to completing this goal.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'fences_wrapper' => 'div',
+    'field_name' => 'field_predicted_result',
+    'label' => 'Predicted Result',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 31,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
+  t('A measurable result that you predict will occur due to completing this goal.');
   t('Body');
   t('Date');
+  t('Predicted Result');
+  t('The beginning and end days of your goal.');
 
   return $field_instances;
 }
