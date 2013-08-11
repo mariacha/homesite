@@ -34,10 +34,34 @@ function os_event_views_api() {
  */
 function os_event_node_info() {
   $items = array(
+    'current_date' => array(
+      'name' => t('Current date'),
+      'base' => 'node_content',
+      'description' => t('An entity that contains the current date.'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
     'event' => array(
-      'name' => t('Event'),
+      'name' => t('Goal'),
       'base' => 'node_content',
       'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
+    'reward' => array(
+      'name' => t('Reward'),
+      'base' => 'node_content',
+      'description' => t('A reward for achieving a goal\'s result.'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
+    'task' => array(
+      'name' => t('Task'),
+      'base' => 'node_content',
+      'description' => t('A task pushes you toward a goal.'),
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',
