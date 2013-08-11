@@ -1,0 +1,10 @@
+name = fishers_theme
+description = Permissions and settings associated with the website's theme.
+core = 7.x
+package = Fishers website
+dependencies[] = ctools
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[variable][] = theme_sky_files_directory
+features[variable][] = theme_sky_settings

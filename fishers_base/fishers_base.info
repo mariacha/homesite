@@ -4,7 +4,7 @@ name = Fishers website
 distribution_name = Fishers website
 description = The home website for fisherspdx.com.
 core = 7.x
-theme = bartik
+theme = sky
 
 ; Core
 dependencies[] = block
@@ -46,6 +46,8 @@ dependencies[] = wysiwyg
 ; Features
 dependencies[] = fishers_base_base
 dependencies[] = fishers_wordpress_migration
+dependencies[] = fishers_theme
+dependencies[] = os_event
 
 ;
 ; Users

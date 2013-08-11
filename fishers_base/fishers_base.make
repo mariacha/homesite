@@ -86,3 +86,33 @@ projects[wordpress_migrate][version] = "2.2"
 
 ; Wordpress migrate
 projects[migrate][version] = "2.5"
+
+;
+; OS events
+;
+
+; Context
+projects[context][version] = "3.0-beta7"
+
+; Context admin
+projects[context_admin][version] = "1.2"
+
+; Date
+projects[date][version] = "2.6"
+
+; Entity
+projects[entity][version] = "1.1"
+
+; Full calendar
+projects[fullcalendar][version] = "2.0"
+
+; Views bulk operations
+projects[views_bulk_operations][version] = "3.1"
+
+;
+; Theme
+;
+projects[adaptivetheme][version] = "3.1"
+; Going to try to mimic this sort of thing:
+; http://themeforest.net/theme_previews/4553346-responsive-portfolio-personal-vcard-js?index=5
+projects[sky][version] = "3.0-rc1"

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the fishers_theme feature.
+ */
+
+include_once 'fishers_theme.features.inc';
