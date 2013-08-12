@@ -103,6 +103,9 @@ projects[date][version] = "2.6"
 ; Entity
 projects[entity][version] = "1.1"
 
+; Entity Reference
+projects[entityreference][version] = "1.0"
+
 ; Full calendar
 projects[fullcalendar][version] = "2.0"
 
