@@ -339,6 +339,7 @@ function os_event_field_default_field_instances() {
   $field_instances['node-task-field_dates_completed'] = array(
     'bundle' => 'task',
     'default_value' => NULL,
+    'default_value_function' => 'entityreference_prepopulate_field_default_value',
     'deleted' => 0,
     'description' => 'Dates this was completed',
     'display' => array(
@@ -364,6 +365,16 @@ function os_event_field_default_field_instances() {
     'label' => 'Dates completed',
     'required' => 0,
     'settings' => array(
+      'behaviors' => array(
+        'prepopulate' => array(
+          'action' => 'hide',
+          'action_on_edit' => 1,
+          'fallback' => 'hide',
+          'og_context' => 0,
+          'skip_perm' => 0,
+          'status' => 1,
+        ),
+      ),
       'user_register_form' => FALSE,
     ),
     'widget' => array(
