@@ -106,6 +106,9 @@ projects[entity][version] = "1.1"
 ; Entity Reference
 projects[entityreference][version] = "1.0"
 
+; Entity Reference prepopulate
+projects[entityreference_prepopulate][version] = "1.3"
+
 ; Full calendar
 projects[fullcalendar][version] = "2.0"
 
