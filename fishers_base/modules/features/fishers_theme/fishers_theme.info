@@ -1,4 +1,4 @@
-name = fishers_theme
+name = Fishers Theme
 description = Permissions and settings associated with the website's theme.
 core = 7.x
 package = Fishers website
