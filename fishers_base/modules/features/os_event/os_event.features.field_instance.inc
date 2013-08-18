@@ -367,9 +367,9 @@ function os_event_field_default_field_instances() {
     'settings' => array(
       'behaviors' => array(
         'prepopulate' => array(
-          'action' => 'hide',
-          'action_on_edit' => 1,
-          'fallback' => 'hide',
+          'action' => 'disable',
+          'action_on_edit' => 0,
+          'fallback' => 'none',
           'og_context' => 0,
           'skip_perm' => 0,
           'status' => 1,
