@@ -34,14 +34,6 @@ function os_event_views_api() {
  */
 function os_event_node_info() {
   $items = array(
-    'current_date' => array(
-      'name' => t('Current date'),
-      'base' => 'node_content',
-      'description' => t('An entity that contains the current date.'),
-      'has_title' => '1',
-      'title_label' => t('Title'),
-      'help' => '',
-    ),
     'event' => array(
       'name' => t('Goal'),
       'base' => 'node_content',

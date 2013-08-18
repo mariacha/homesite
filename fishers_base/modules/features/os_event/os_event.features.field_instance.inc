@@ -10,62 +10,6 @@
 function os_event_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-current_date-field_date'
-  $field_instances['node-current_date-field_date'] = array(
-    'bundle' => 'current_date',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_repeat_rule' => 'show',
-        ),
-        'type' => 'date_default',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'fences_wrapper' => 'div',
-    'field_name' => 'field_date',
-    'label' => 'date',
-    'required' => 1,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'repeat_collapsed' => 0,
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_popup',
-      'weight' => 31,
-    ),
-  );
-
   // Exported field_instance: 'node-event-body'
   $field_instances['node-event-body'] = array(
     'bundle' => 'event',
@@ -338,19 +282,22 @@ function os_event_field_default_field_instances() {
   // Exported field_instance: 'node-task-field_dates_completed'
   $field_instances['node-task-field_dates_completed'] = array(
     'bundle' => 'task',
-    'default_value' => NULL,
-    'default_value_function' => 'entityreference_prepopulate_field_default_value',
     'deleted' => 0,
-    'description' => 'Dates this was completed',
+    'description' => 'These are the dates that you\'ve completed your task',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
+        'module' => 'date',
         'settings' => array(
-          'link' => FALSE,
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_repeat_rule' => 'show',
         ),
-        'type' => 'entityreference_label',
-        'weight' => 3,
+        'type' => 'date_default',
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -365,24 +312,26 @@ function os_event_field_default_field_instances() {
     'label' => 'Dates completed',
     'required' => 0,
     'settings' => array(
-      'behaviors' => array(
-        'prepopulate' => array(
-          'action' => 'disable',
-          'action_on_edit' => 0,
-          'fallback' => 'none',
-          'og_context' => 0,
-          'skip_perm' => 0,
-          'status' => 1,
-        ),
-      ),
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 34,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'repeat_collapsed' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 35,
     ),
   );
 
@@ -500,14 +449,13 @@ function os_event_field_default_field_instances() {
   t('Body');
   t('Date');
   t('Dates completed');
-  t('Dates this was completed');
   t('Dates to do');
   t('Goal');
   t('Predicted Result');
   t('Reward');
   t('The beginning and end days of your goal.');
   t('The dates this task must be done.');
-  t('date');
+  t('These are the dates that you\'ve completed your task');
 
   return $field_instances;
 }

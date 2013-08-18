@@ -48,40 +48,28 @@ function os_event_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_dates_completed',
-    'foreign keys' => array(
-      'node' => array(
-        'columns' => array(
-          'target_id' => 'nid',
-        ),
-        'table' => 'node',
-      ),
-    ),
-    'indexes' => array(
-      'target_id' => array(
-        0 => 'target_id',
-      ),
-    ),
+    'foreign keys' => array(),
+    'indexes' => array(),
     'locked' => 0,
-    'module' => 'entityreference',
+    'module' => 'date',
     'settings' => array(
-      'handler' => 'base',
-      'handler_settings' => array(
-        'behaviors' => array(
-          'views-select-list' => array(
-            'status' => 0,
-          ),
-        ),
-        'sort' => array(
-          'type' => 'none',
-        ),
-        'target_bundles' => array(
-          'current_date' => 'current_date',
-        ),
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 0,
+        'minute' => 0,
+        'month' => 'month',
+        'second' => 0,
+        'year' => 'year',
       ),
-      'target_type' => 'node',
+      'repeat' => 0,
+      'timezone_db' => '',
+      'todate' => '',
+      'tz_handling' => 'none',
     ),
     'translatable' => 0,
-    'type' => 'entityreference',
+    'type' => 'datetime',
   );
 
   // Exported field_base: 'field_dates_to_do'
