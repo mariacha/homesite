@@ -8,7 +8,7 @@ defaults[projects][subdir] = "contrib"
 
 core = "7.x"
 projects[drupal][type] = "core"
-projects[drupal][version] = "7.22"
+projects[drupal][version] = "7.23"
 ; Make taxonomy permissions use vocabulary machine name instead of vid
 projects[drupal][patch][] = "http://drupal.org/files/995156-31_portable_taxonomy_permissions-D7-15.patch"
 ; Ensure plain text fields evaluate line breaks.
@@ -101,7 +101,7 @@ projects[context_admin][version] = "1.2"
 projects[date][version] = "2.6"
 
 ; Entity
-projects[entity][version] = "1.1"
+projects[entity][version] = "1.2"
 
 ; Entity Reference
 projects[entityreference][version] = "1.0"
