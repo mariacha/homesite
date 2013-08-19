@@ -50,14 +50,6 @@ function os_event_node_info() {
       'title_label' => t('Title'),
       'help' => '',
     ),
-    'task' => array(
-      'name' => t('Task'),
-      'base' => 'node_content',
-      'description' => t('A task pushes you toward a goal.'),
-      'has_title' => '1',
-      'title_label' => t('Title'),
-      'help' => '',
-    ),
   );
   return $items;
 }
