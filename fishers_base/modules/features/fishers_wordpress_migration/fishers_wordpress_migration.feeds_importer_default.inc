@@ -139,6 +139,16 @@ function fishers_wordpress_migration_feeds_importer_default() {
             'target' => 'uri',
             'unique' => FALSE,
           ),
+          4 => array(
+            'source' => 'galleryid',
+            'target' => 'field_nextgen_path',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'pid',
+            'target' => 'field_nextgen_id',
+            'unique' => FALSE,
+          ),
         ),
         'update_existing' => '1',
         'input_format' => NULL,
