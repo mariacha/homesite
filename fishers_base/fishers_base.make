@@ -61,6 +61,12 @@ libraries[profiler][patch][] = "http://drupal.org/files/profiler_heirarchical_no
 ;libraries[swfobject][destination] = "libraries"
 ;libraries[swfobject][directory_name] = "swfobject"
 
+; Full calendar javascript
+libraries[fullcalendar][download][type] = "get"
+libraries[fullcalendar][download][url] = "http://arshaw.com/fullcalendar/downloads/fullcalendar-1.6.3.zip"
+libraries[fullcalendar][destination] = "libraries"
+libraries[fullcalendar][directory_name] = "fullcalendar"
+
 ; Project-specific modules, and overrides.
 
 ; Feeds
