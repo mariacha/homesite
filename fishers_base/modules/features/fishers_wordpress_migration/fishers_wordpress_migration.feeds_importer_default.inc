@@ -21,11 +21,11 @@ function fishers_wordpress_migration_feeds_importer_default() {
       'plugin_key' => 'FeedsFileFetcher',
       'config' => array(
         'allowed_extensions' => 'txt csv tsv xml opml',
-        'direct' => FALSE,
+        'direct' => 1,
         'directory' => 'private://feeds',
         'allowed_schemes' => array(
-          0 => 'public',
-          1 => 'private',
+          'public' => 'public',
+          'private' => 'private',
         ),
       ),
     ),
@@ -70,7 +70,7 @@ function fishers_wordpress_migration_feeds_importer_default() {
         'bundle' => 'media_gallery',
       ),
     ),
-    'content_type' => '',
+    'content_type' => 'media_gallery',
     'update' => 0,
     'import_period' => '-1',
     'expire_period' => 3600,
