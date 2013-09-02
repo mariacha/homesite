@@ -157,7 +157,11 @@ function _fishers_wordpress_migration_add_feed($filename, $importer){
     $source->startImport();
   }
 
-  // Add to schedule, make sure importer is scheduled, too.
-  $source->schedule();
-  $source->importer->schedule();
+  if(drupal_is_cli()) {
+    drush_backend_batch_process();
+  } else {
+    // Add to schedule, make sure importer is scheduled, too.
+    $source->schedule();
+    $source->importer->schedule();
+  }
 }

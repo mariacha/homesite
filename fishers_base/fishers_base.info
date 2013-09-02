@@ -45,7 +45,6 @@ dependencies[] = wysiwyg
 
 ; Features
 dependencies[] = fishers_base_base
-dependencies[] = fishers_wordpress_migration
 dependencies[] = fishers_theme
 dependencies[] = os_event
 
