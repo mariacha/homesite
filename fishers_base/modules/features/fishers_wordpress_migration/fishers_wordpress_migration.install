@@ -14,10 +14,12 @@
  * fullpath FROM `wp_ngg_pictures` LEFT JOIN `wp_ngg_gallery` ON galleryid=gid
  */
 function fishers_wordpress_migration_install() {
-  _fishers_wordpress_migration_add_wp_blog('fisherspdx.wordpress.2013-07-28.xml');
   _fishers_wordpress_migration_add_feed('ghalidrm_albums.csv', 'nextgen_gallery');
   _fishers_wordpress_migration_add_feed('wp_ngg_pictures.csv', 'nextgen_images');
-
+  _fishers_wordpress_migration_add_wp_blog('fisherspdx.wordpress.2013-07-28.xml');
+  if(drupal_is_cli()) {
+    drush_backend_batch_process();
+  }
 }
 
 /**
@@ -56,65 +58,26 @@ function _fishers_wordpress_migration_add_wp_blog($filename){
   }
 
   // Import each migration in order, until done or time is running out
-  if (!drupal_is_cli()) {
-    $operations = array();
-    foreach ($blog->migrations() as $migration) {
-       $operations[] = array('migrate_ui_batch',
-                              array('import', $migration->getMachineName(),
-                                    array('unit' => 'items', 'value' => ''), FALSE));
-    }
+  $operations = array();
+  foreach ($blog->migrations() as $migration) {
+     $operations[] = array('migrate_ui_batch',
+                            array('import', $migration->getMachineName(),
+                                  array('unit' => 'items', 'value' => ''), FALSE));
+  }
 
-    $batch = array(
-      'operations' => $operations,
-      'title' => t('WordPress import in progress'),
-      'file' => drupal_get_path('module', 'migrate_ui') .
-                    '/migrate_ui.pages.inc',
-      'init_message' => t('Starting import process'),
-      'progress_message' => t(''),
-      'error_message' => t('An error occurred. Some or all of the import processing has failed.'),
-      'finished' => 'migrate_ui_batch_finish',
-    );
-    batch_set($batch);
-  }
-  else {
-    $spawned = FALSE;
-    $force_drush = variable_get('wordpress_migrate_force_drush', FALSE);
-    // Set up informational messages depending on Drush configuration.
-    if ($force_drush) {
-      $migration_in_progress = t('Your blog is being imported. You will receive an email when the import is complete.');
-    }
-    else {
-      $migration_in_progress = t('The blog is too large to completely import immediately.
-        The rest of the import will be run in the background and you will receive an email
-        when it is complete.');
-    }
-    foreach ($blog->migrations() as $migration) {
-      if ($force_drush || (($result = $migration->processImport()) && $result == MigrationBase::RESULT_INCOMPLETE)) {
-        $drush = variable_get('wordpress_migrate_drush', '');
-        if (!$drush) {
-          $message = t('The blog was too large to import through the browser - please
-              <a href="@config">configure drush</a> so the import process may be
-              run in the background.',
-            array('@config' => url('admin/content/wordpress')));
-          form_set_error('wxr_file', $message);
-          break;
-        }
-        drupal_set_message($migration_in_progress);
-        $uri = 'http://' . $_SERVER['HTTP_HOST'];
-        $log_file = '/tmp/' . $filename . '.import.log';
-        $uid = $GLOBALS['user']->uid;
-        $command = "$drush --user=$uid --uri=$uri wordpress-migrate-import --root=" .
-                   DRUPAL_ROOT . " $destination >$log_file 2>&1 &";
-        exec($command);
-        $spawned = TRUE;
-        break;
-      }
-    }
-    if (!$spawned) {
-      drupal_set_message(t('File %filename successfully uploaded and imported',
-        array('%filename' => $filename)));
-    }
-  }
+  $batch = array(
+    'operations' => $operations,
+    'title' => t('WordPress import in progress'),
+    'file' => drupal_get_path('module', 'migrate_ui') .
+                  '/migrate_ui.pages.inc',
+    'init_message' => t('Starting import process'),
+    'progress_message' => t(''),
+    'error_message' => t('An error occurred. Some or all of the import processing has failed.'),
+    'finished' => 'migrate_ui_batch_finish',
+  );
+  batch_set($batch);
+
+
 }
 
 /**
@@ -157,11 +120,8 @@ function _fishers_wordpress_migration_add_feed($filename, $importer){
     $source->startImport();
   }
 
-  if(drupal_is_cli()) {
-    drush_backend_batch_process();
-  } else {
-    // Add to schedule, make sure importer is scheduled, too.
-    $source->schedule();
-    $source->importer->schedule();
-  }
+  // Add to schedule, make sure importer is scheduled, too.
+  $source->schedule();
+  $source->importer->schedule();
+
 }
