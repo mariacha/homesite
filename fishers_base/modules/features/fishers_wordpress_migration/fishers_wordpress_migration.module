@@ -5,3 +5,111 @@
  */
 
 include_once 'fishers_wordpress_migration.features.inc';
+
+/**
+ * Implements hook_filter_info().
+ *
+ * The Nextgen gallery from Wordpress leaves behind tags like:
+ * [nggallery id=18] to represent a whole gallery, and
+ * [singlepic id=422 w=320 h=240 float=] to represent a single picture from a
+ * gallery. This filter translates that into markup.
+ */
+function fishers_wordpress_migration_filter_info() {
+  $filters['nggallery_filter'] = array(
+    'title' => t('Convert NextGen gallery tags into markup'),
+    'description' => t('This filter will convert [nggallery id=18] and [singlepic id=422 w=320 h=240 float=] tags into markup.'),
+    'process callback' => 'fishers_wordpress_migration_filter',
+    'weight' => 2,
+  );
+
+  return $filters;
+}
+
+/**
+ * Filter callback for fishers_wordpress_migration markup filter.
+ */
+function fishers_wordpress_migration_filter($text) {
+  $text = ' ' . $text . ' ';
+  $text = preg_replace_callback("/\[.*?\]/s", 'fishers_wordpress_migration_token_to_markup', $text);
+
+  return $text;
+}
+
+/**
+ * Replace callback to convert a fishers_wordpress_migration file tag into HTML markup.
+ *
+ * @param string $match
+ *   Takes a match of tag code
+ * @param boolean $wysiwyg
+ *   Set to TRUE if called from within the WYSIWYG text area editor.
+ * @return
+ *   The HTML markup representation of the tag, or an empty string on failure.
+ *
+ * @see fishers_wordpress_migration_get_file_without_label()
+ */
+function fishers_wordpress_migration_token_to_markup($match, $wysiwyg = FALSE) {
+  $settings = array();
+  $match = str_replace("[", "", $match);
+  $match = str_replace("]", "", $match);
+  $tag = $match[0];
+
+  try {
+    if (!is_string($tag)) {
+      throw new Exception('Unable to find matching tag');
+    }
+
+    $nextgen_tag = replace(" ", "&", $tag);
+    parse_str($nextgen_tag);
+
+    if (isset($nggallery)) {
+      $gid = $id;
+
+      $query = new EntityFieldQuery();
+      $gallery = $query->entityCondition('entity_type', 'node')
+                    ->propertyCondition('status', 1)
+                    ->fieldCondition('field_nextgen_gid', 'value', $gid, '=')
+                    ->execute();
+
+      // TODO: Figure out how to display the gallery within the node.
+
+    }
+    elseif (isset($singlepic)) {
+      // query looks lik id=422 w=320 h=240 float=left/right/''
+      $fid = $id;
+      $query = new EntityFieldQuery();
+      $files = $query->entityCondition('entity_type', 'file')
+                    ->propertyCondition('status', 1)
+                    ->fieldCondition('field_nextgen_id', 'value', $fid, '=')
+                    ->execute();
+
+      $files = file_load_multiple(array_keys($entities['file']));
+      $file = current($files);
+
+      if (!$file) {
+        throw new Exception('Could not load fishers_wordpress_migration object');
+      }
+      $tag_info['file'] = $file;
+      $tag_info['view_mode'] = 'teaser';
+    }
+  }
+  catch (Exception $e) {
+    watchdog('fishers_wordpress_migration', 'Unable to render fishers_wordpress_migration from %tag. Error: %error', array('%tag' => $tag, '%error' => $e->getMessage()));
+    return '';
+  }
+
+  // Display the field elements.
+  $element = array();
+  $element['content']['file'] = media_get_file_without_label($file, $tag_info['view_mode'], $settings);
+  field_attach_prepare_view('file', array($file->fid => $file), $tag_info['view_mode']);
+  entity_prepare_view('file', array($file->fid => $file));
+  $element['content'] += field_attach_view('file', $file, $tag_info['view_mode']);
+  if (count(element_children($element['content'])) > 1) {
+    // Add surrounding divs to group them together.
+    // We dont want divs when there are no additional fields to allow them
+    // to display inline.
+    $element['content']['#prefix'] = '<div>';
+    $element['content']['#suffix'] = '</div>';
+  }
+
+  return drupal_render($element);
+}
