@@ -12,7 +12,7 @@
  *
  * SELECT wp_ngg_pictures.*, CONCAT('public://', path, '/', filename) as
  * fullpath FROM `wp_ngg_pictures` LEFT JOIN `wp_ngg_gallery` ON galleryid=gid
- */
+
 function fishers_wordpress_migration_install() {
   _fishers_wordpress_migration_add_feed('ghalidrm_albums.csv', 'nextgen_gallery');
   _fishers_wordpress_migration_add_feed('wp_ngg_pictures.csv', 'nextgen_images');
@@ -21,6 +21,8 @@ function fishers_wordpress_migration_install() {
     drush_backend_batch_process();
   }
 }
+ * 
+ */
 
 /**
  * Loads all blog entries from a file within this module.

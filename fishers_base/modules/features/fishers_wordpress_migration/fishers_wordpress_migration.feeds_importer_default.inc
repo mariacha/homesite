@@ -21,7 +21,7 @@ function fishers_wordpress_migration_feeds_importer_default() {
       'plugin_key' => 'FeedsFileFetcher',
       'config' => array(
         'allowed_extensions' => 'txt csv tsv xml opml',
-        'direct' => 1,
+        'direct' => 0,
         'directory' => 'private://feeds',
         'allowed_schemes' => array(
           'public' => 'public',

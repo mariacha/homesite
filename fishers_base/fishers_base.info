@@ -47,13 +47,14 @@ dependencies[] = wysiwyg
 dependencies[] = fishers_base_base
 dependencies[] = fishers_theme
 dependencies[] = os_event
+dependencies[] = fishers_wordpress_migration
 
 ;
 ; Users
 ;
 users[admin][uid] = 1
 users[admin][name] = admin
-users[admin][mail] = admin@fishers_base.example.com
+users[admin][mail] = admin@fisherspdx.com
 users[admin][status] = 1
 users[admin][data][overlay] = 0
 
