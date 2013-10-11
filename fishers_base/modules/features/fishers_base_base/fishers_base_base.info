@@ -9,6 +9,7 @@ dependencies[] = ctools
 dependencies[] = features
 dependencies[] = file_entity
 dependencies[] = filter
+dependencies[] = fishers_wordpress_migration
 dependencies[] = image
 dependencies[] = image_resize_filter
 dependencies[] = media
