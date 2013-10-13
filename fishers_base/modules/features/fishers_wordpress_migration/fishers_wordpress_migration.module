@@ -124,7 +124,7 @@ function fishers_wordpress_migration_token_to_markup($match, $wysiwyg = FALSE) {
 /**
  * Helper function to assign orphaned images to the correct gallery.
  */
-function _fishers_wordpress_migration1() {
+function _fishers_wordpress_migration() {
   require_once drupal_get_path('module', 'media_gallery') . '/media_gallery.pages.inc';
   // Get all unique galleryids.
   $gids = db_select('field_data_field_nextgen_gid', 'fgid')

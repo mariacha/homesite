@@ -70,7 +70,7 @@ function fishers_wordpress_migration_feeds_importer_default() {
         'bundle' => 'media_gallery',
       ),
     ),
-    'content_type' => 'media_gallery',
+    'content_type' => '',
     'update' => 0,
     'import_period' => '-1',
     'expire_period' => 3600,

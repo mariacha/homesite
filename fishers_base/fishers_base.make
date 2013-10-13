@@ -26,7 +26,7 @@ includes[images] = "images.make"
 ;includes[demo] = "demo.make"
 
 ; Uncomment to use Panels.
-;includes[panels] = "panels.make"
+includes[panels] = "panels.make"
 
 ; Uncomment to use Solr Search.
 ; includes[solr] = "solr.make"
@@ -69,6 +69,13 @@ libraries[fullcalendar][download][url] = "http://arshaw.com/fullcalendar/downloa
 libraries[fullcalendar][destination] = "libraries"
 libraries[fullcalendar][directory_name] = "fullcalendar"
 
+; Colorbox
+libraries[colorbox][download][type] = "git"
+libraries[colorbox][download][url] = "https://github.com/jackmoore/colorbox.git"
+libraries[colorbox][destination] = "libraries/colorbox"
+libraries[colorbox][directory_name] = "colorbox"
+
+
 ; Project-specific modules, and overrides.
 
 ; Feeds
@@ -82,12 +89,6 @@ projects[job_scheduler][version] = "2.0-alpha3"
 
 ; Media gallery
 projects[media_gallery][version] = "2.x-dev"
-
-; OS blog
-projects[os_blog][type] = "module"
-projects[os_blog][subdir] = "features"
-projects[os_blog][download][branch] = "7.x-2.x"
-projects[os_blog][download][url] = "https://github.com/opensourcery/os_blog.git"
 
 ; Wordpress migrate
 projects[wordpress_migrate][version] = "2.2"

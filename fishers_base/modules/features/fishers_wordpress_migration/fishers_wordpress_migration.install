@@ -20,8 +20,9 @@ function fishers_wordpress_migration_install() {
   if(drupal_is_cli()) {
     drush_backend_batch_process();
   }
+  _fishers_wordpress_migration();
 }
- * 
+ *
  */
 
 /**
