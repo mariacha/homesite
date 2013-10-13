@@ -124,7 +124,7 @@ function fishers_wordpress_migration_token_to_markup($match, $wysiwyg = FALSE) {
 /**
  * Helper function to assign orphaned images to the correct gallery.
  */
-function _fishers_wordpress_migration() {
+function _fishers_wordpress_migration_images_to_galleries() {
   require_once drupal_get_path('module', 'media_gallery') . '/media_gallery.pages.inc';
   // Get all unique galleryids.
   $gids = db_select('field_data_field_nextgen_gid', 'fgid')
@@ -156,5 +156,73 @@ function _fishers_wordpress_migration() {
 
     // Add the files to the gallery.
     media_gallery_add_images(node_load(current($node_bare['node'])->nid));
+  }
+}
+
+
+/**
+ * Implements hook_library().
+ */
+function fishers_wordpress_migration_library() {
+  $libraries = array();
+
+  $magnific_library_path = libraries_get_path('magnific-popup', FALSE);
+  $module_path = drupal_get_path('module', 'fishers_wordpress_migration');
+
+  if (empty($magnific_library_path)) {
+    drupal_set_message(t('Please install the Magnific Popup JS library.'), 'error');
+    return array();
+  }
+
+  $libraries['magnific_popup'] = array(
+    'title' => 'Magnific Popup jQuery Plugin',
+    'website' => 'http://dimsemenov.com/plugins/magnific-popup/',
+    'version' => '1',
+    'js' => array(
+      "{$magnific_library_path}/dist/jquery.magnific-popup.js" => array('type' => 'file'),
+    ),
+    'css' => array(
+      "{$magnific_library_path}/dist/magnific-popup.css" => array('type' => 'file'),
+    ),
+    'dependencies' => array(
+      array('system', 'jquery'),
+    ),
+  );
+
+  return $libraries;
+}
+
+
+/**
+ * Internal utility function to check required library status.
+ */
+function _fishers_wordpress_migration_check_status() {
+  $jquery = drupal_get_library('system', 'jquery');
+  if (empty($jquery) || empty($jquery['version'])) {
+    // jQuery not available?  Totally an error condition.
+    // @todo We should watchdog this, and/or report it on site status screen.
+    return FALSE;
+  }
+  // Check if the available jQuery version is 1.7.2+.
+  // @see http://dimsemenov.com/plugins/magnific-popup/documentation.html
+  if (version_compare($jquery['version'], '1.7.2') < 0) {
+    // $jquery['version'] is lower than 1.7.2.
+    // @todo We should watchdog this, and/or report it on site status screen.
+    //return FALSE;
+  }
+  return TRUE;
+}
+
+/**
+ * Implements hook_view().
+ *
+ * Adds magnific to galleries.
+ */
+function fishers_wordpress_migration_node_view($node, $view_mode, $langcode) {
+  // Add Magnific Popup library to page.
+  if ($node->type == 'media_gallery' && $view_mode == 'full') {
+    drupal_add_library('fishers_wordpress_migration', 'magnific_popup', FALSE);
+    drupal_add_js(drupal_get_path('module', 'fishers_wordpress_migration') .'/js/magnificPrep.js', 'file');
+    drupal_add_css(drupal_get_path('module', 'fishers_wordpress_migration') .'/css/magnificPrep.css', 'file');
   }
 }

@@ -70,10 +70,10 @@ libraries[fullcalendar][destination] = "libraries"
 libraries[fullcalendar][directory_name] = "fullcalendar"
 
 ; Colorbox
-libraries[colorbox][download][type] = "git"
-libraries[colorbox][download][url] = "https://github.com/jackmoore/colorbox.git"
-libraries[colorbox][destination] = "libraries/colorbox"
-libraries[colorbox][directory_name] = "colorbox"
+libraries[magnific-popup][download][type] = "git"
+libraries[magnific-popup][download][url] = "https://github.com/dimsemenov/Magnific-Popup.git"
+libraries[magnific-popup][destination] = "libraries"
+libraries[magnific-popup][directory_name] = "magnific-popup"
 
 
 ; Project-specific modules, and overrides.
@@ -83,6 +83,9 @@ projects[feeds][version] = "2.0-alpha8"
 
 ; Feeds Files
 projects[feeds_files][version] = "1.x-dev"
+
+; Jquery Update
+projects[jquery_update][version] = "2.3"
 
 ; Job Scheduler
 projects[job_scheduler][version] = "2.0-alpha3"

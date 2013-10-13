@@ -1,0 +1,14 @@
+.mfp-content #content {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.mfp-content #content .media-gallery-detail {
+  float: none;
+  text-align: center;
+  max-width: 100%;
+}
+
+.mfp-content #content .no-overflow {
+  color: #fff;
+}
