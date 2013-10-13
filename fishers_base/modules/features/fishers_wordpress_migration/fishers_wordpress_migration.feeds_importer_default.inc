@@ -140,13 +140,13 @@ function fishers_wordpress_migration_feeds_importer_default() {
             'unique' => FALSE,
           ),
           4 => array(
-            'source' => 'galleryid',
-            'target' => 'field_nextgen_path',
+            'source' => 'pid',
+            'target' => 'field_nextgen_id',
             'unique' => FALSE,
           ),
           5 => array(
-            'source' => 'pid',
-            'target' => 'field_nextgen_id',
+            'source' => 'galleryid',
+            'target' => 'field_nextgen_gid',
             'unique' => FALSE,
           ),
         ),

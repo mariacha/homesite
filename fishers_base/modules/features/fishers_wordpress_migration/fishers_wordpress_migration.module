@@ -91,6 +91,13 @@ function fishers_wordpress_migration_token_to_markup($match, $wysiwyg = FALSE) {
       $tag_info['file'] = $file;
       $tag_info['view_mode'] = 'teaser';
 
+      if(isset($vars['w'])) {
+        $settings['attributes']['width'] = $vars['w'];
+      }
+      if(isset($vars['h'])) {
+        $settings['attributes']['height'] = $vars['h'];
+      }
+
       // Display the field elements.
       $element = array();
       $element['content']['file'] = media_get_file_without_label($file, $tag_info['view_mode'], $settings);
@@ -112,4 +119,42 @@ function fishers_wordpress_migration_token_to_markup($match, $wysiwyg = FALSE) {
   }
 
   return drupal_render($element);
+}
+
+/**
+ * Helper function to assign orphaned images to the correct gallery.
+ */
+function _fishers_wordpress_migration1() {
+  require_once drupal_get_path('module', 'media_gallery') . '/media_gallery.pages.inc';
+  // Get all unique galleryids.
+  $gids = db_select('field_data_field_nextgen_gid', 'fgid')
+            ->fields('fgid', array('field_nextgen_gid_value'))
+            ->groupBy('field_nextgen_gid_value')
+            ->execute()
+            ->fetchCol('field_nextgen_gid_value');
+
+  foreach($gids as $gid) {
+    // Pull in all files with a matching galleryid.
+    $query = new EntityFieldQuery;
+
+    // Get all files with this gid.
+    $files = $query
+      ->entityCondition('entity_type', 'file')
+      ->fieldCondition('field_nextgen_gid', 'value', $gid, '=')
+      ->execute();
+
+    $_POST['files'] = array_keys($files['file']);
+
+    $query = new EntityFieldQuery;
+
+    // Get first gallery with this gid.
+    $node_bare = $query
+      ->entityCondition('entity_type', 'node')
+      ->fieldCondition('field_nextgen_gid', 'value', $gid, '=')
+      ->range(0,1)
+      ->execute();
+
+    // Add the files to the gallery.
+    media_gallery_add_images(node_load(current($node_bare['node'])->nid));
+  }
 }
