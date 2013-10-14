@@ -16,6 +16,10 @@ function fishers_theme_user_presave(&$edit, $account, $category) {
       $taylor_pic = $account->name == 'ghalidrim' ? image_load($edit['picture_upload']->uri) : image_load(user_load_by_name('ghalidrim')->picture->uri);
       $maria_pic = $account->name == 'mariacha' ? image_load($edit['picture_upload']->uri) : image_load(user_load_by_name('mariacha')->picture->uri);
 
+      if(!$taylor_pic) {
+        $taylor_pic = $maria_pic;
+      }
+
       image_gd_crop($taylor_pic, 0, 0, $taylor_pic->info['width'] * 2, $taylor_pic->info['height']);
 
       imagecopymerge($taylor_pic->resource, $maria_pic->resource, $taylor_pic->info['width'] / 2, 0, 0, 0, $maria_pic->info['width'], $maria_pic->info['height'], 100);
