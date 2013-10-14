@@ -69,8 +69,10 @@ function fishers_wordpress_migration_token_to_markup($match, $wysiwyg = FALSE) {
                     ->propertyCondition('status', 1)
                     ->fieldCondition('field_nextgen_gid', 'value', $gid, '=')
                     ->execute();
-
-      // TODO: Figure out how to display the gallery within the node.
+      $element = node_view(node_load(current($gallery['node'])->nid), "teaser");
+      _media_gallery_attach_css_resources($element);
+      $element['#prefix'] = '<div class="mg-col-4">';
+      $element['#suffix'] = '</div>';
 
     }
     elseif (isset($vars['singlepic'])) {
