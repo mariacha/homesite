@@ -225,6 +225,7 @@ function fishers_wordpress_migration_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'media_gallery' && $view_mode == 'full') {
     drupal_add_library('fishers_wordpress_migration', 'magnific_popup', FALSE);
     drupal_add_js(drupal_get_path('module', 'fishers_wordpress_migration') .'/js/magnificPrep.js', 'file');
-    drupal_add_css(drupal_get_path('module', 'fishers_wordpress_migration') .'/css/magnificPrep.css', 'file');
   }
+
+  drupal_add_css(drupal_get_path('module', 'fishers_wordpress_migration') .'/css/magnificPrep.css', 'file');
 }
