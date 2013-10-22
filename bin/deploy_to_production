@@ -8,10 +8,10 @@
 #
 
 # Deploy to typical shared hosting.
-USER=
-HOST=
-INSTALLROOT=/home/$USER/os_app
-DOCUMENTROOT=/home/$USER/public_html
+USER=ghalidrm
+HOST=192.254.235.47
+INSTALLROOT=/home3/$USER/home/ghalidrim/public_html
+DOCUMENTROOT=/home3/$USER/home/ghalidrim/public_html/dev
 
 ##### Things below here generally won't need to be changed #####
 
@@ -21,7 +21,7 @@ if [[ -z "$HOST" || -z "$USER" ]]; then
 fi
 
 # Initial run? Set up some stuff.
-if ssh $USER@$HOST "[ ! -d $INSTALLROOT/releases ]"; then
+if ssh -p 2222 $USER@$HOST "[ ! -d $INSTALLROOT/releases ]"; then
   echo -n "It appears this is the first deployment. Perform initial setup? (y/n): "
   read CONFIRM
   if [ "$CONFIRM" != "y" ]; then
@@ -29,13 +29,13 @@ if ssh $USER@$HOST "[ ! -d $INSTALLROOT/releases ]"; then
     exit 2
   fi
 
-  scp -q ./drupal/sites/default/default.settings.php $USER@$HOST:default.settings.php
+  scp -p 2222 -q ./drupal/sites/default/default.settings.php $USER@$HOST:default.settings.php
 
   # Create our directories, place the settings.php file, archive existing
   # "public_html" directory and create initial documentroot symlink.
   REMOTE_HOME=$(dirname $DOCUMENTROOT)
   ARCHIVED_DOCUMENTROOT=$REMOTE_HOME/old_public_html
-  ssh $USER@$HOST "mkdir -p $INSTALLROOT/{releases,shared/files};
+  ssh -p 2222 $USER@$HOST "mkdir -p $INSTALLROOT/{releases,shared/files};
     mv \$HOME/default.settings.php $INSTALLROOT/shared/settings.php;
     chmod 700 $INSTALLROOT $INSTALLROOT/{releases,shared};
     chmod 400 $INSTALLROOT/shared/settings.php;
@@ -63,14 +63,14 @@ rm -Rf /tmp/$TIMESTAMP/sites/default/files
 ln -s $INSTALLROOT/shared/files /tmp/$TIMESTAMP/sites/default/files
 ln -s $INSTALLROOT/shared/settings.php /tmp/$TIMESTAMP/sites/default/settings.php
 
-ssh $USER@$HOST cp -Rp $DOCUMENTROOT/ $INSTALLROOT/releases/$TIMESTAMP
-rsync -azC --delete /tmp/$TIMESTAMP/ $USER@$HOST:$INSTALLROOT/releases/$TIMESTAMP/
+ssh -p 2222 $USER@$HOST cp -Rp $DOCUMENTROOT/ $INSTALLROOT/releases/$TIMESTAMP
+rsync -azC --delete --rsh='ssh -p2222' /tmp/$TIMESTAMP/ $USER@$HOST:$INSTALLROOT/releases/$TIMESTAMP/
 
 # Change group to PHP's user
-#ssh $USER@$HOST chgrp -R www-data $INSTALLROOT
+#ssh -p 2222 $USER@$HOST chgrp -R www-data $INSTALLROOT
 
 # Remove old release link and link the new version
-ssh $USER@$HOST "rm -f $INSTALLROOT/current_tmp 2>/dev/null; ln -s $INSTALLROOT/releases/$TIMESTAMP $INSTALLROOT/current_tmp && mv -Tf $INSTALLROOT/current_tmp $DOCUMENTROOT"
+ssh -p 2222 $USER@$HOST "rm -f $INSTALLROOT/current_tmp 2>/dev/null; ln -s $INSTALLROOT/releases/$TIMESTAMP $INSTALLROOT/current_tmp && mv -Tf $INSTALLROOT/current_tmp $DOCUMENTROOT"
 
 # Clean up local machine
 rm -Rf /tmp/$TIMESTAMP
