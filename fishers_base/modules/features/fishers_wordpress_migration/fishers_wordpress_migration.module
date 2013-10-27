@@ -84,8 +84,10 @@ function fishers_wordpress_migration_token_to_markup($match, $wysiwyg = FALSE) {
                     ->fieldCondition('field_nextgen_id', 'value', $fid, '=')
                     ->execute();
 
-      $files = file_load_multiple(array_keys($entities['file']));
-      $file = current($files);
+      if(is_array($entities['file'])) {
+        $files = file_load_multiple(array_keys($entities['file']));
+        $file = current($files);
+      }
 
       if (!$file) {
         throw new Exception('Could not load fishers_wordpress_migration object');
