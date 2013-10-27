@@ -104,7 +104,7 @@ projects[migrate][version] = "2.5"
 ;
 
 ; Context
-projects[context][version] = "3.0-beta7"
+projects[context][version] = "3.1"
 
 ; Context admin
 projects[context_admin][version] = "1.2"
