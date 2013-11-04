@@ -29,3 +29,12 @@ function fishers_theme_user_presave(&$edit, $account, $category) {
       image_gd_save($maria_pic, $sky_settings['logo_path']);
   }
 }
+
+/**
+ * Implements hook_init().
+ *
+ * Adds a few styles to the default.
+ */
+function fishers_theme_init() {
+  drupal_add_css(drupal_get_path('module', 'fishers_theme') . '/css/alterations.css');
+}

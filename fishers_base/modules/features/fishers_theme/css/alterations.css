@@ -1,0 +1,25 @@
+/*
+    Document   : alterations
+    Created on : Nov 3, 2013, 8:13:10 PM
+    Author     : mariacha
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+html .site-name-fisherspdx {
+  background: url('images/back-2.jpg') #999999;
+
+}
+
+.site-name-fisherspdx #logo {
+  padding: 0 20px 0 0;
+}
+
+
+#header {
+  background: url('images/back-1.jpg') #fff;
+}
+
+.site-name-fisherspdx .page #columns {
+  border-radius: 0;
+}
