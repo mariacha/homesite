@@ -69,7 +69,7 @@ libraries[fullcalendar][download][url] = "http://arshaw.com/fullcalendar/downloa
 libraries[fullcalendar][destination] = "libraries"
 libraries[fullcalendar][directory_name] = "fullcalendar"
 
-; Colorbox
+; Magnific Popup
 libraries[magnific-popup][download][type] = "git"
 libraries[magnific-popup][download][url] = "https://github.com/dimsemenov/Magnific-Popup.git"
 libraries[magnific-popup][destination] = "libraries"

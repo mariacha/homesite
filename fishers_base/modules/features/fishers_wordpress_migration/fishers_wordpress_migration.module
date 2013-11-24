@@ -70,9 +70,9 @@ function fishers_wordpress_migration_token_to_markup($match, $wysiwyg = FALSE) {
                     ->fieldCondition('field_nextgen_gid', 'value', $gid, '=')
                     ->execute();
       $element = node_view(node_load(current($gallery['node'])->nid), "teaser");
-      _media_gallery_attach_css_resources($element);
       $element['#prefix'] = '<div class="mg-col-4">';
       $element['#suffix'] = '</div>';
+
 
     }
     elseif (isset($vars['singlepic'])) {
@@ -230,4 +230,19 @@ function fishers_wordpress_migration_node_view($node, $view_mode, $langcode) {
   }
 
   drupal_add_css(drupal_get_path('module', 'fishers_wordpress_migration') .'/css/magnificPrep.css', 'file');
+}
+
+/**
+ * Implements hook_init().
+ *
+ * Adds css to pages with pulled in node galleries.
+ *
+ * @see _media_gallery_attach_css_resources().
+ */
+function fishers_wordpress_migration_init(){
+  $path = drupal_get_path('module', 'media_gallery');
+  drupal_add_css($path . '/media_gallery.css');
+  drupal_add_css($path . '/media_gallery.ie7.css', array(
+    'browsers' => array('IE' => 'lt IE 8', '!IE' => FALSE))
+  );
 }
