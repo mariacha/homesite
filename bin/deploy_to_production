@@ -10,8 +10,8 @@
 # Deploy to typical shared hosting.
 USER=ghalidrm
 HOST=192.254.235.47
-INSTALLROOT=/home3/$USER/home/ghalidrim/public_html
-DOCUMENTROOT=/home3/$USER/home/ghalidrim/public_html/dev
+INSTALLROOT=/home3/$USER
+DOCUMENTROOT=/home3/$USER/public_html
 
 ##### Things below here generally won't need to be changed #####
 
