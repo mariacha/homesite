@@ -29,18 +29,6 @@ includes[panels] = "panels.make"
 ; Uncomment to use Solr Search.
 ; includes[solr] = "solr.make"
 
-; Follow
-projects[follow][version] = "2.0-alpha1"
-
-; Google analytics
-projects[google_analytics][version] = "1.3"
-
-; Menu Block
-projects[menu_block][version] = "2.3"
-
-; Mollom
-projects[mollom][version] = "2.6"
-
 ; Libraries.
 projects[libraries][version] = "2.1"
 
@@ -69,9 +57,6 @@ libraries[magnific-popup][directory_name] = "magnific-popup"
 
 
 ; Project-specific modules, and overrides.
-
-; Feeds
-projects[feeds][version] = "2.0-alpha8"
 
 ; Feeds Files
 projects[feeds_files][version] = "1.x-dev"

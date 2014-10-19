@@ -23,14 +23,6 @@ projects[features][patch][] = "https://drupal.org/files/features-remove-minimum-
 ; Expanded or hidden menu links aren't seen as customized http://drupal.org/node/927576
 projects[features][patch][] = "http://drupal.org/files/menu_links_customized-927576-8.patch"
 
-; Later dev commit fixes array/boolean mismatch.
-; @see https://drupal.org/node/1915318
-projects[features_override][download][branch] = "7.x-2.x"
-projects[features_override][download][revision] = "ed1df0e"
-; A patch to fix coding standards issues with produced features override code
-; Original issue see: http://drupal.org/node/1974336
-projects[features_override][patch][] = "http://drupal.org/files/export_breaks_coding_standards_0.patch"
-
 projects[fences][version] = "1.0"
 
 ; FooTable (responsive tables).
