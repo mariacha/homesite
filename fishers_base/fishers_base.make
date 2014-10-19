@@ -105,7 +105,7 @@ projects[context_admin][version] = "1.2"
 projects[date][version] = "2.6"
 
 ; Entity
-projects[entity][version] = "1.2"
+projects[entity][version] = "1.5"
 
 ; Entity Reference
 projects[entityreference][version] = "1.1"
