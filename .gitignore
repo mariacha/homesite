@@ -8,5 +8,4 @@
 .vagrant
 Vagrantfile.local
 .htaccess
-fishers_base/modules/features/os_blog/*
 db/production_current.sql.gz
