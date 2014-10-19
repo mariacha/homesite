@@ -11,7 +11,7 @@ projects[caption_filter][patch][] = "https://drupal.org/files/tinymce-button--14
 
 projects[file_entity][version] = "2.0-unstable7"
 
-projects[image_resize_filter][version] = "1.13"
+projects[image_resize_filter][version] = "1.14"
 
 projects[media][version] = "2.0-unstable7"
 ; http://drupal.org/node/1278180#comment-5085370
