@@ -18,6 +18,11 @@ html .site-name-fisherspdx {
 }
 
 
+.site-name-fisherspdx #logo img {
+  border: 1px solid #b45f04;
+}
+
+
 #header {
   background: url('images/pattern3.gif') center top #fff;
   //background: url('images/pattern1.gif') center top #fff;
