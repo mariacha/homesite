@@ -63,12 +63,6 @@ libraries[profiler][patch][] = "http://drupal.org/files/profiler_heirarchical_no
 ;libraries[swfobject][destination] = "libraries"
 ;libraries[swfobject][directory_name] = "swfobject"
 
-; Full calendar javascript
-libraries[fullcalendar][download][type] = "get"
-libraries[fullcalendar][download][url] = "http://arshaw.com/fullcalendar/downloads/fullcalendar-1.6.3.zip"
-libraries[fullcalendar][destination] = "libraries"
-libraries[fullcalendar][directory_name] = "fullcalendar"
-
 ; Magnific Popup
 libraries[magnific-popup][download][type] = "git"
 libraries[magnific-popup][download][url] = "https://github.com/dimsemenov/Magnific-Popup.git"
@@ -120,9 +114,6 @@ projects[entityreference][version] = "1.1"
 
 ; Entity Reference prepopulate
 projects[entityreference_prepopulate][version] = "1.3"
-
-; Full calendar
-projects[fullcalendar][version] = "2.0"
 
 ; Views bulk operations
 projects[views_bulk_operations][version] = "3.1"
