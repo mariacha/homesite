@@ -58,6 +58,9 @@ libraries[magnific-popup][directory_name] = "magnific-popup"
 
 ; Project-specific modules, and overrides.
 
+; Feeds
+projects[feeds][version] = "2.0-alpha8"
+
 ; Feeds Files
 projects[feeds_files][version] = "1.x-dev"
 
