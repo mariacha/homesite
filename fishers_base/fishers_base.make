@@ -102,7 +102,7 @@ projects[context][version] = "3.1"
 projects[context_admin][version] = "1.2"
 
 ; Date
-projects[date][version] = "2.6"
+projects[date][version] = "2.8"
 
 ; Entity
 projects[entity][version] = "1.5"
