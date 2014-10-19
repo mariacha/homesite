@@ -25,12 +25,6 @@ projects[features][patch][] = "http://drupal.org/files/menu_links_customized-927
 
 projects[fences][version] = "1.0"
 
-; FooTable (responsive tables).
-projects[footable][download][branch] = "7.x-1.x"
-projects[footable][download][revision] = "a52b6dc"
-; https://drupal.org/node/1924942#comment-7098614
-projects[footable][patch][] = "https://drupal.org/files/footable-hook-requirements-install-1924942-02.patch"
-
 projects[html5_tools][version] = "1.2"
 
 projects[redirect][version] = "1.0-rc1"
@@ -81,8 +75,3 @@ libraries[tinymce][download][type] = "get"
 libraries[tinymce][download][url] = "https://github.com/downloads/tinymce/tinymce/tinymce_3.5.8.zip"
 libraries[tinymce][destination] = "libraries"
 libraries[tinymce][directory_name] = "tinymce"
-
-libraries[footable][directory_name] = "FooTable"
-libraries[footable][download][revision] = "228b101"
-libraries[footable][download][type] = "git"
-libraries[footable][download][url] = "https://github.com/bradvin/FooTable.git"
