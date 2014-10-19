@@ -7,7 +7,9 @@
 */
 
 html .site-name-fisherspdx {
-  background: url('images/back-2.jpg') #999999;
+
+  background: url('images/pattern3.gif') center top #fff;
+  //background: url('images/pattern2.gif') center top #999999;
 
 }
 
@@ -17,9 +19,12 @@ html .site-name-fisherspdx {
 
 
 #header {
-  background: url('images/back-1.jpg') #fff;
+  background: url('images/pattern3.gif') center top #fff;
+  //background: url('images/pattern1.gif') center top #fff;
 }
 
 .site-name-fisherspdx .page #columns {
-  border-radius: 0;
+  background: #fffff0;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 3px 3px #b45f04 inset;
 }
